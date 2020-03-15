@@ -1,4 +1,4 @@
-# set magic number to 0x1BADB002 to identified by bootloader 
+# set magic number to 0x1BADB002 to identified by bootloader
 .set MAGIC,    0x1BADB002
 
 # set flags to 0
@@ -16,7 +16,7 @@
 .long CHECKSUM
 
 
-# set the stack bottom 
+# set the stack bottom
 stackBottom:
 # define the maximum size of stack to 512 bytes
 .skip 1024
