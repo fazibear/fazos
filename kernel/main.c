@@ -1,12 +1,11 @@
+#include "screen.h"
+
 int main()
 {
-	char *str = "Hello, world", *ch;
-	unsigned short *vidmem = (unsigned short*) 0xb8000;
-	unsigned i;
+	screen_cls();
+  screen_print("Hello World!");
+  screen_print("Hello World!");
 	
-	for (ch = str, i = 0; *ch; ch++, i++)
-		vidmem[i] = (unsigned char) *ch | 0x1200;
-		
-	for (;;)
+  for (;;)
 		;
 }
