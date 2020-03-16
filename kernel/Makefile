@@ -11,15 +11,16 @@ OUT = kernel.bin
 all: kernel.bin
 
 kernel.bin: $(OBJS)
-	@echo "LINK $(OUT)"
-	@ld -T link.ld -m elf_i386 -o $(OUT) $(OBJS) -nostdlib
+	@echo "LINK ->\t$(OUT)"
+	@ld -T link.ld -m elf_i386 -o $(OUT) $(OBJS)
 
 .S.o:
-	@echo " AS  $@"
+	@echo " AS  $<\t->\t$@"
 	@$(ASM) $(ASM_FLAGS) $< -o $@
 
 .c.o:
-	@echo " CC  $@"
+	@echo " CC  $<\t->\t$@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+
 clean: 
 	rm -f $(OBJS) $(OUT)

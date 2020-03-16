@@ -37,7 +37,7 @@ _start:
 	mov $stackTop, %esp
 
   # call the kernel main source
-	call main
+	call _main
 
 	cli
 
