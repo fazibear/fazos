@@ -1,26 +1,26 @@
 CC ?= gcc
-ASM ?= as
+AS ?= as
 
-ASM_FLAGS = --32
-OBJS = boot.o screen.o main.o
-
+ASFLAGS = --32
 CFLAGS = -m32 -ffreestanding -O2 -Wall -Wextra
+
+OBJS = boot.o screen.o main.o
 
 OUT = kernel.bin
 
 all: kernel.bin
 
-kernel.bin: $(OBJS)
-	@echo "LINK ->\t$(OUT)"
-	@ld -T link.ld -m elf_i386 -o $(OUT) $(OBJS)
-
 .S.o:
-	@echo " AS  $<\t->\t$@"
-	@$(ASM) $(ASM_FLAGS) $< -o $@
+	@echo "[ AS ] $<\t-> $@"
+	@$(AS) $(ASFLAGS) $< -o $@
 
 .c.o:
-	@echo " CC  $<\t->\t$@"
+	@echo "[ CC ] $<\t-> $@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+
+kernel.bin: $(OBJS)
+	@echo "[ LD ] $(OUT)"
+	@ld -T link.ld -m elf_i386 -o $(OUT) $(OBJS)
 
 clean: 
 	rm -f $(OBJS) $(OUT)

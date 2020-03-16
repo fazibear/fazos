@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t kernel_build .
+cd kernel && make $1
