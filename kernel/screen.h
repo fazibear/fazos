@@ -1,8 +1,9 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
-#define VGA_ADDRESS 0xB8000
-#define VGA_BUFSIZE 2200
+#define SCREEN_ADDRESS 0xB8000
+#define SCREEN_BUFSIZE 2200
+#define SCREEN_WIDTH 80
 
 enum screen_color {
   BLACK,
@@ -31,6 +32,7 @@ unsigned short screen_current_background_color;
 
 void screen_cls();
 void screen_print(char *string);
+void screen_println(char *string);
 void screen_set_color(short color);
 void screen_set_background_color(short color);
 
