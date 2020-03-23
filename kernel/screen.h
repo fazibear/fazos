@@ -25,8 +25,13 @@ enum screen_color {
 
 unsigned short* screen_mem;
 unsigned short screen_current;
+unsigned short screen_current_color;
+unsigned short screen_current_background_color;
+
 
 void screen_cls();
 void screen_print(char *string);
+void screen_set_color(short color);
+void screen_set_background_color(short color);
 
 #endif
