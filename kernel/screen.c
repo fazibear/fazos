@@ -1,10 +1,10 @@
 #include "screen.h"
 
-unsigned short *screen_mem = (unsigned short*) 0xb8000;
+unsigned short *screen_mem = (unsigned short*) VGA_ADDRESS;
 unsigned short screen_current = 0;
 
 void screen_cls() {
-  for(int i = 0; i < BUFSIZE; i++) {
+  for(int i = 0; i < VGA_BUFSIZE; i++) {
     screen_mem[i] = 0;
   }
   screen_current = 0;
