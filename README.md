@@ -9,7 +9,8 @@ For now it's just a kernel (sort of)
 Build:
 
 ```sh
-$ ./build_in_docker.sh
+$ ./setup.sh
+$ ./make_in_docker.sh
 ```
 
 Run:
