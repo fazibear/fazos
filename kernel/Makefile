@@ -11,15 +11,15 @@ OUT = kernel.bin
 all: kernel.bin
 
 .S.o:
-	@echo "[ AS ] $<\t-> $@"
+	@echo "[ \e[33mAS\e[0m ] $<\t-> $@"
 	@$(AS) $(ASFLAGS) $< -o $@
 
 .c.o:
-	@echo "[ CC ] $<\t-> $@"
+	@echo "[ \e[34mCC\e[0m ] $<\t-> $@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
 kernel.bin: $(OBJS)
-	@echo "[ LD ] $(OUT)"
+	@echo "[ \e[35mLD\e[0m ] $(OUT)"
 	@ld -T link.ld -m elf_i386 -o $(OUT) $(OBJS)
 
 clean: 
