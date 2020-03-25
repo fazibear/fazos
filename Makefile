@@ -19,6 +19,9 @@ $(KERNEL_OUT): $(KERNEL_DIR) $(KERNEL_OBJ)
 	@echo "[ \e[35mBIN\e[0m ] $(KERNEL_OUT)"
 	@$(LD) -T src/kernel/link.ld -m elf_i386 -o $(KERNEL_OUT) $(KERNEL_OBJ)
 
+qemu:
+	qemu-system-i386 -kernel $(KERNEL_OUT)
+
 # -------------------------------------------------
 
 $(DST_DIR)/%.o: $(SRC_DIR)/%.S
