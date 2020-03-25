@@ -4,7 +4,7 @@ AS ?= as
 ASFLAGS = --32
 CFLAGS = -m32 -ffreestanding -O2 -Wall -Wextra
 
-OBJS = boot.o screen.o gdt.o main.o
+OBJS = boot_asm.o screen.o gdt_asm.o gdt.o main.o
 
 OUT = kernel.bin
 
