@@ -1,3 +1,3 @@
 #!/bin/bash
 
-astyle --style=google -s2 --recursive ./*.c,*.h
+astyle -n --style=google -s2 --recursive ./*.c,*.h

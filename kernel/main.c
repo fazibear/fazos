@@ -1,6 +1,8 @@
+#include "gdt.h"
 #include "screen.h"
 
 void _main() {
+  gdt_install();
   screen_cls();
 
   screen_println("");

@@ -4,18 +4,20 @@ AS ?= as
 ASFLAGS = --32
 CFLAGS = -m32 -ffreestanding -O2 -Wall -Wextra
 
-OBJS = boot.o screen.o main.o
+OBJS = boot.o screen.o gdt.o main.o
 
 OUT = kernel.bin
 
-all: kernel.bin
+BUILD_DIR = build/
+
+all: clean kernel.bin
 
 .S.o:
-	@echo "[ \e[33mAS\e[0m ] $<\t-> $@"
+	@echo "[ \e[33mAS\e[0m ] $< -> $@"
 	@$(AS) $(ASFLAGS) $< -o $@
 
 .c.o:
-	@echo "[ \e[34mCC\e[0m ] $<\t-> $@"
+	@echo "[ \e[34mCC\e[0m ] $< -> $@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
 kernel.bin: $(OBJS)

@@ -15,37 +15,46 @@
 .long FLAGS
 .long CHECKSUM
 
-
 # set the stack bottom 
-stackBottom:
+stack_bottom:
 # define the maximum size of stack to 512 bytes
 .skip 1024
 
-
 # set the stack top which grows from higher to lower
 
-stackTop:
+stack_top:
 
 .section .text
-.global _start
-.type _start, @function
 
+.global _start
+.global gdt_flush
+
+.extern gp 
 
 _start:
 
-  # assign current stack pointer location to stackTop
-	mov $stackTop, %esp
+  # assign current stack pointer location to stack_top
+	mov $stack_top, %esp
 
   # call the kernel main source
 	call _main
 
 	cli
 
-
 # put system in infinite loop
-hltLoop:
+hlt_loop:
 
 	hlt
-	jmp hltLoop
+	jmp hlt_loop
+
+gdt_flush:
+  lgdt gp       # Load the GDT with our '_gp' which is a special pointer
+  mov %ax, 0x10      # 0x10 is the offset in the GDT to our data segment
+  mov %ds, %ax
+  mov %es, %ax
+  mov %fs, %ax
+  mov %gs, %ax
+  mov %ss, %ax
+  ret               # Returns back to the C code!
 
 .size _start, . - _start
