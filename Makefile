@@ -1,12 +1,42 @@
-all: kernel
+CC ?= gcc
+AS ?= as
+LD ?= ld
 
-kernel:
-	@$(MAKE) -C kernel
+ASFLAGS = --32
+CFLAGS = -m32 -ffreestanding -O2 -Wall -Wextra
+
+SRC_DIR = src
+DST_DIR = dst
+
+KERNEL_DIR = $(DST_DIR)/kernel/
+KERNEL_XXX = boot_asm.o screen.o gdt_asm.o gdt.o main.o
+KERNEL_OBJ = $(addprefix $(KERNEL_DIR),$(KERNEL_XXX))
+KERNEL_OUT = $(DST_DIR)/kernel.bin
+
+all: $(KERNEL_OUT)
+
+$(KERNEL_OUT): $(KERNEL_DIR) $(KERNEL_OBJ)
+	@echo "[ \e[35mBIN\e[0m ] $(KERNEL_OUT)"
+	@$(LD) -T src/kernel/link.ld -m elf_i386 -o $(KERNEL_OUT) $(KERNEL_OBJ)
+
+# -------------------------------------------------
+
+$(DST_DIR)/%.o: $(SRC_DIR)/%.S
+	@echo "[ \e[33mASM\e[0m ] $< -> $@"
+	@$(AS) $(ASFLAGS) $< -o $@
+
+$(DST_DIR)/%.o: $(SRC_DIR)/%.c
+	@echo "[ \e[34m C \e[0m ] $< -> $@"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+
+$(DST_DIR):
+	@echo "[ \e[36mDIR\e[0m ] $@"
+	@mkdir $@
+
+$(DST_DIR)/%: dst
+	@echo "[ \e[36mDIR\e[0m ] $@"
+	@mkdir $@
 
 clean:
-	@$(MAKE) -C kernel clean
-
-.PHONY: kernel
-
-
-
+	@echo "[ \e[31m!!!\e[0m ] Clean!"
+	@rm -rf $(DST_DIR)
