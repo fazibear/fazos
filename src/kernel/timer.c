@@ -6,7 +6,7 @@
 unsigned long timer_ticks = 0;
 
 void timer_handler(struct regs *r) {
-  
+
   UNUSED(r);
 
   /* Increment our 'tick count' */
