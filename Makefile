@@ -9,11 +9,11 @@ SRC_DIR = src
 DST_DIR = dst
 
 KERNEL_DIR = $(DST_DIR)/kernel/
-KERNEL_XXX = boot_asm.o screen.o gdt_asm.o gdt.o main.o
-KERNEL_OBJ = $(addprefix $(KERNEL_DIR),$(KERNEL_XXX))
+KERNEL_SRC = boot_asm.S screen.c gdt_asm.S gdt.c main.c
+KERNEL_OBJ = $(addprefix $(KERNEL_DIR),$(subst .c,.o,$(subst .S,.o,$(KERNEL_SRC))))
 KERNEL_OUT = $(DST_DIR)/kernel.bin
 
-all: $(KERNEL_OUT)
+all: clean $(KERNEL_OUT)
 
 $(KERNEL_OUT): $(KERNEL_DIR) $(KERNEL_OBJ)
 	@echo "[ \e[35mBIN\e[0m ] $(KERNEL_OUT)"
@@ -32,13 +32,9 @@ $(DST_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "[ \e[34m C \e[0m ] $< -> $@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
-$(DST_DIR):
+$(DST_DIR)/%:
 	@echo "[ \e[36mDIR\e[0m ] $@"
-	@mkdir $@
-
-$(DST_DIR)/%: dst
-	@echo "[ \e[36mDIR\e[0m ] $@"
-	@mkdir $@
+	@mkdir -p $@
 
 clean:
 	@echo "[ \e[31m!!!\e[0m ] Clean!"
