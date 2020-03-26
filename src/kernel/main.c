@@ -1,8 +1,14 @@
-#include "gdt.h"
+#include "system.h"
 #include "screen.h"
+#include "gdt.h"
+#include "idt.h"
+#include "isrs.h"
 
 void _main() {
   gdt_install();
+  idt_install();
+  isrs_install();
+
   screen_cls();
 
   screen_println("");
@@ -32,6 +38,10 @@ void _main() {
   screen_print("* ");
   screen_set_color(YELLOW);
   screen_println("*");
+
+  char x = 2/0;
+
+  screen_print_char(x);
 
   screen_println("");
   screen_set_color(WHITE);

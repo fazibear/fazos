@@ -1,5 +1,5 @@
-#ifndef GDT_H
-#define GDT_H
+#ifndef _GDT_H
+#define _GDT_H
 
 /* Defines a GDT entry. We say packed, because it prevents the
 *  compiler from doing things that it thinks is best: Prevent
@@ -24,7 +24,8 @@ struct gdt_ptr {
 struct gdt_entry gdt[3];
 
 struct gdt_ptr gp;
-extern void gdt_flush();
+
+extern void _gdt_flush();
 
 void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran);
 void gdt_install();

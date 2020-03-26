@@ -1,5 +1,5 @@
-#ifndef SCREEN_H
-#define SCREEN_H
+#ifndef _SCREEN_H
+#define _SCREEN_H
 
 #define SCREEN_ADDRESS 0xB8000
 #define SCREEN_BUFSIZE 2200
