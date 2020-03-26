@@ -41,7 +41,6 @@ void screen_check_for_new_line(int offset) {
 }
 
 void screen_print_char(char ch) {
-  screen_check_for_new_line(1);
   switch(ch) {
   case '\r':
     screen_check_for_new_line(SCREEN_WIDTH - screen_current % SCREEN_WIDTH);
@@ -51,8 +50,11 @@ void screen_print_char(char ch) {
     screen_check_for_new_line(SCREEN_WIDTH - screen_current % SCREEN_WIDTH);
     screen_current += SCREEN_WIDTH - screen_current % SCREEN_WIDTH;
     break;
-
+  case '\b':
+    screen_mem[--screen_current] = screen_char_with_color(0);
+    break;
   case 32 ... 126:
+    screen_check_for_new_line(1);
     screen_mem[screen_current++] = screen_char_with_color(ch);
     break;
   }
