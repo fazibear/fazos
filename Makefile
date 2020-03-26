@@ -9,7 +9,7 @@ SRC_DIR = src
 DST_DIR = dst
 
 KERNEL_DIR = $(DST_DIR)/kernel/
-KERNEL_SRC = boot_asm.S system.c screen.c gdt_asm.S gdt.c idt_asm.S idt.c isrs_asm.S isrs.c irq_asm.S irq.c main.c
+KERNEL_SRC = boot_asm.S system.c screen.c gdt_asm.S gdt.c idt_asm.S idt.c isrs_asm.S isrs.c irq_asm.S irq.c timer.c main.c
 KERNEL_OBJ = $(addprefix $(KERNEL_DIR),$(subst .c,.o,$(subst .S,.o,$(KERNEL_SRC))))
 KERNEL_OUT = $(DST_DIR)/kernel.bin
 

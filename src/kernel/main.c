@@ -4,12 +4,14 @@
 #include "idt.h"
 #include "isrs.h"
 #include "irq.h"
+#include "timer.h"
 
 void _main() {
   gdt_install();
   idt_install();
   isrs_install();
   irq_install();
+  // timer_install();
 
   screen_cls();
 
@@ -45,5 +47,12 @@ void _main() {
 //  screen_print_char(x);
 
   screen_set_color(WHITE);
-  screen_print_string("READY.\n");
+  screen_print_string("8READY.\n");
+  screen_print_string("7READY.\n");
+  screen_print_string("6READY.\n");
+  screen_print_string("5READY.\n");
+  screen_print_string("4READY.\n");
+  screen_print_string("3READY.\n");
+  screen_print_string("2READY.\n");
+  screen_print_string("1READY.\n");
 }

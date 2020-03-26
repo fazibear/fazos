@@ -39,9 +39,8 @@ _start:
 	cli
 
 # put system in infinite loop
-hlt_loop:
-
-	hlt
-	jmp hlt_loop
+sti_loop:
+	sti
+  jmp sti_loop
 
 .size _start, . - _start

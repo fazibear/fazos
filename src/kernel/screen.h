@@ -2,8 +2,9 @@
 #define _SCREEN_H
 
 #define SCREEN_ADDRESS 0xB8000
-#define SCREEN_BUFSIZE 2200
 #define SCREEN_WIDTH 80
+#define SCREEN_HEIGHT 25
+#define SCREEN_BUFSIZE SCREEN_HEIGHT * SCREEN_WIDTH
 
 enum screen_color {
   BLACK,
@@ -31,6 +32,7 @@ unsigned short screen_current_background_color;
 
 
 void screen_cls();
+void screen_new_line();
 void screen_print_char(char ch);
 void screen_print_string(char *string);
 void screen_set_color(short color);
