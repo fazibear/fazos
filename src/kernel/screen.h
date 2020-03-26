@@ -32,9 +32,7 @@ unsigned short screen_current_background_color;
 
 void screen_cls();
 void screen_print_char(char ch);
-void screen_print(char *string);
-void screen_print_n();
-void screen_println(char *string);
+void screen_print_string(char *string);
 void screen_set_color(short color);
 void screen_set_background_color(short color);
 

@@ -13,38 +13,37 @@ void _main() {
 
   screen_cls();
 
-  screen_println("");
+  screen_print_string("\n");
 
-  screen_print("                           ");
+  screen_print_string("                           ");
   screen_set_color(YELLOW);
-  screen_print("* ");
+  screen_print_string("* ");
   screen_set_color(BLUE);
-  screen_print("* ");
+  screen_print_string("* ");
   screen_set_color(RED);
-  screen_print("* ");
+  screen_print_string("* ");
   screen_set_color(GREEN);
-  screen_print("* ");
+  screen_print_string("* ");
   screen_set_color(GREY);
-  screen_print("* ");
+  screen_print_string("* ");
 
   screen_set_color(WHITE);
-  screen_print("FAZOS ");
+  screen_print_string("FAZOS ");
 
   screen_set_color(GREY);
-  screen_print("* ");
+  screen_print_string("* ");
   screen_set_color(GREEN);
-  screen_print("* ");
+  screen_print_string("* ");
   screen_set_color(RED);
-  screen_print("* ");
+  screen_print_string("* ");
   screen_set_color(BLUE);
-  screen_print("* ");
+  screen_print_string("* ");
   screen_set_color(YELLOW);
-  screen_println("*");
+  screen_print_string("*\n\n");
 
 //  char x = 2/0;
 //  screen_print_char(x);
 
-  screen_println("");
   screen_set_color(WHITE);
-  screen_println("READY.");
+  screen_print_string("READY.\n");
 }

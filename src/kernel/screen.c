@@ -24,21 +24,20 @@ void screen_print_char(char ch) {
   screen_mem[screen_current++] = screen_current_background_color << 12 | screen_current_color << 8 | ch;
 }
 
-void screen_print(char *string) {
+void screen_print_string(char *string) {
   char *ch;
   unsigned int i;
 
   for (ch = string, i = 0; *ch; ch++, i++) {
-    screen_print_char(*ch);
+    switch(*ch) {
+    case '\n':
+      screen_current += SCREEN_WIDTH - screen_current % SCREEN_WIDTH;
+      break;
+
+    case 30 ... 47:
+    case 58 ... 126:
+      screen_print_char(*ch);
+      break;
+    }
   }
 }
-
-void screen_print_n() {
-  screen_current += SCREEN_WIDTH - screen_current % SCREEN_WIDTH;
-}
-
-void screen_println(char *string) {
-  screen_print(string);
-  screen_print_n();
-}
-

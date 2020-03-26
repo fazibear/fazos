@@ -98,8 +98,8 @@ void isrs_handler(struct regs *r) {
   if (r->int_no < EXCEPTION_MESSAGES_SIZE) {
     screen_set_background_color(RED);
     screen_set_color(WHITE);
-    screen_print(exception_messages[r->int_no]);
-    screen_println(" Exception. System Halted!");
+    screen_print_string(exception_messages[r->int_no]);
+    screen_print_string(" Exception. System Halted!\n");
     for (;;);
   }
 }
