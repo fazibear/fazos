@@ -1,3 +1,4 @@
+#include "system.h"
 #include "idt.h"
 #include "screen.h"
 #include "isrs.h"
@@ -93,7 +94,7 @@ void isrs_install() {
 *  endless loop. All isrs disable interrupts while they are being
 *  serviced as a 'locking' mechanism to prevent an IRQ from
 *  happening and messing up kernel data structures */
-void fault_handler(struct regs *r) {
+void isrs_handler(struct regs *r) {
   if (r->int_no < EXCEPTION_MESSAGES_SIZE) {
     screen_set_background_color(RED);
     screen_set_color(WHITE);

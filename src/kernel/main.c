@@ -3,11 +3,13 @@
 #include "gdt.h"
 #include "idt.h"
 #include "isrs.h"
+#include "irq.h"
 
 void _main() {
   gdt_install();
   idt_install();
   isrs_install();
+  irq_install();
 
   screen_cls();
 
@@ -39,9 +41,8 @@ void _main() {
   screen_set_color(YELLOW);
   screen_println("*");
 
-  char x = 2/0;
-
-  screen_print_char(x);
+//  char x = 2/0;
+//  screen_print_char(x);
 
   screen_println("");
   screen_set_color(WHITE);

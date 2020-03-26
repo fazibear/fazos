@@ -1,4 +1,4 @@
-.extern fault_handler
+.extern isrs_handler
 
 .macro ISR_NOERRCODE num
 	.global _isr\num
@@ -31,7 +31,7 @@ isr_common_stub:
 	mov %esp, %eax
 	push %eax
 	// Call the C kernel hardware interrupt handler
-	call fault_handler
+	call isrs_handler
 	popl %eax
 	popl %gs
 	popl %fs
