@@ -33,16 +33,30 @@ void screen_cls() {
 }
 
 void screen_check_for_new_line(int offset) {
-  if(screen_current + offset + SCREEN_WIDTH >= SCREEN_BUFSIZE) {
-    memcpy(screen_mem, screen_mem + SCREEN_WIDTH, SCREEN_BUFSIZE - SCREEN_WIDTH);
+  if(screen_current + offset >= SCREEN_BUFSIZE) {
+    memcpyw(screen_mem, screen_mem + SCREEN_WIDTH, SCREEN_BUFSIZE - SCREEN_WIDTH - 1);
     memsetw(screen_mem + SCREEN_BUFSIZE - SCREEN_WIDTH, screen_char_with_color(0), SCREEN_WIDTH);
-    screen_current =- SCREEN_WIDTH;
+    screen_current -= SCREEN_WIDTH;
   }
 }
 
 void screen_print_char(char ch) {
   screen_check_for_new_line(1);
-  screen_mem[screen_current++] = screen_char_with_color(ch);
+  switch(ch) {
+  case '\r':
+    screen_check_for_new_line(SCREEN_WIDTH - screen_current % SCREEN_WIDTH);
+    screen_current = screen_current % SCREEN_WIDTH;
+    break;
+  case '\n':
+    screen_check_for_new_line(SCREEN_WIDTH - screen_current % SCREEN_WIDTH);
+    screen_current += SCREEN_WIDTH - screen_current % SCREEN_WIDTH;
+    break;
+
+  case 32 ... 126:
+    screen_mem[screen_current++] = screen_char_with_color(ch);
+    break;
+  }
+  screen_set_cursor();
 }
 
 void screen_print_string(char *string) {
@@ -50,16 +64,6 @@ void screen_print_string(char *string) {
   unsigned int i;
 
   for (ch = string, i = 0; *ch; ch++, i++) {
-    switch(*ch) {
-    case '\n':
-      screen_check_for_new_line(SCREEN_WIDTH - screen_current % SCREEN_WIDTH);
-      screen_current += SCREEN_WIDTH - screen_current % SCREEN_WIDTH;
-      break;
-
-    case 32 ... 126:
-      screen_print_char(*ch);
-      break;
-    }
+    screen_print_char(*ch);
   }
-  screen_set_cursor();
 }

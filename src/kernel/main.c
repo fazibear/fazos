@@ -5,6 +5,7 @@
 #include "isrs.h"
 #include "irq.h"
 #include "timer.h"
+#include "keyboard.h"
 
 void _main() {
   gdt_install();
@@ -12,6 +13,7 @@ void _main() {
   isrs_install();
   irq_install();
   // timer_install();
+  keyboard_install();
 
   screen_cls();
 

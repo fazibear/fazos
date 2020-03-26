@@ -7,6 +7,14 @@ void *memcpy(void *dest, const void *src, int count) {
   return dest;
 }
 
+void *memcpyw(void *dest, const void *src, int count) {
+  const unsigned short *sp = (const unsigned short *)src;
+  unsigned short *dp = (unsigned short *)dest;
+  for(; count != 0; count--) *dp++ = *sp++;
+  return dest;
+}
+
+
 void *memset(void *dest, char val, int count) {
   char *temp = (char *)dest;
   for( ; count != 0; count--) *temp++ = val;
