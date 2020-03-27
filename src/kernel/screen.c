@@ -34,7 +34,7 @@ void screen_cls() {
 
 void screen_check_for_new_line(int offset) {
   if(screen_current + offset >= SCREEN_BUFSIZE) {
-    memcpyw(screen_mem, screen_mem + SCREEN_WIDTH, SCREEN_BUFSIZE - SCREEN_WIDTH - 1);
+    memcpyw(screen_mem, screen_mem + SCREEN_WIDTH, SCREEN_BUFSIZE - SCREEN_WIDTH);
     memsetw(screen_mem + SCREEN_BUFSIZE - SCREEN_WIDTH, screen_char_with_color(0), SCREEN_WIDTH);
     screen_current -= SCREEN_WIDTH;
   }
