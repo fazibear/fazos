@@ -1,7 +1,6 @@
 #ifndef _SYSTEM_H
 #define _SYSTEM_H
 
-#define UNUSED(x) (void)(x)
 /* This defines what the stack looks like after an _isr was running */
 struct regs {
   unsigned int gs, fs, es, ds;      /* pushed the segs last */

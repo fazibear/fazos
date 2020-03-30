@@ -2,6 +2,7 @@
 #include "keyboard.h"
 #include "screen.h"
 #include "irq.h"
+#include "helpers.h"
 
 /* KBDUS means US Keyboard Layout. This is a scancode table
 *  used to layout a standard US keyboard. I have left some
@@ -48,8 +49,7 @@ unsigned char kbdus[128] = {
 };
 
 /* Handles the keyboard interrupt */
-void keyboard_handler(struct regs *r) {
-  UNUSED(r);
+void keyboard_handler(struct regs *r UNUSED ) {
   unsigned char scancode;
 
   /* Read from the keyboard's data buffer */
