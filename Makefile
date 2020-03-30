@@ -18,7 +18,7 @@ KERNEL_OUT = $(DST_DIR)/kernel.bin
 all: clean $(KERNEL_OUT)
 
 $(KERNEL_OUT): $(KERNEL_DIR) $(KERNEL_OBJ)
-	@echo -e "[ \e[35mBIN\e[0m ] $(KERNEL_OUT)"
+	@echo -e '[ \e[35mBIN\e[0m ] $(KERNEL_OUT)'
 	@$(LD) -o $(KERNEL_OUT) $(KERNEL_OBJ) $(LDFLAGS) -T src/kernel/link.ld -m elf_i386
 
 qemu: $(KERNEL_OUT)
@@ -27,17 +27,17 @@ qemu: $(KERNEL_OUT)
 # -------------------------------------------------
 
 $(DST_DIR)/%.o: $(SRC_DIR)/%.S
-	@echo -e "[ \e[33mASM\e[0m ] $< -> $@"
+	@echo -e '[ \e[33mASM\e[0m ] $< -> $@'
 	@$(AS) $(ASFLAGS) $< -o $@
 
 $(DST_DIR)/%.o: $(SRC_DIR)/%.c
-	@echo -e "[ \e[34m C \e[0m ] $< -> $@"
+	@echo -e '[ \e[34m C \e[0m ] $< -> $@'
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
 $(DST_DIR)/%:
-	@echo -e "[ \e[36mDIR\e[0m ] $@"
+	@echo -e '[ \e[36mDIR\e[0m ] $@'
 	@mkdir -p $@
 
 clean:
-	@echo -e "[ \e[31m!!!\e[0m ] Clean!"
+	@echo -e '[ \e[31m!!!\e[0m ] Clean!'
 	@rm -rf $(DST_DIR)
