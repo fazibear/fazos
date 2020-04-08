@@ -29,18 +29,17 @@ stack_top:
 .global _start
 
 _start:
-
   # assign current stack pointer location to stack_top
-	mov $stack_top, %esp
+  mov $stack_top, %esp
 
   # call the kernel main source
-	call _main
+  call _main
 
-	cli
+  cli
 
 # put system in infinite loop
 sti_loop:
-	sti
+  sti
   jmp sti_loop
 
 .size _start, . - _start

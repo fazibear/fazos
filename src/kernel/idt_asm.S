@@ -4,6 +4,6 @@
 .global _idt_load
 
 _idt_load:
-    lidt idtp
-    ret
-	
+  lidt idtp
+  ret
+  

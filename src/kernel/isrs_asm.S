@@ -1,45 +1,45 @@
 .extern isrs_handler
 
 .macro ISR_NOERRCODE num
-	.global _isr\num
-	_isr\num:
-		cli
-		pushl $0
-		pushl $\num
-		jmp isr_common_stub
+  .global _isr\num
+  _isr\num:
+    cli
+    pushl $0
+    pushl $\num
+    jmp isr_common_stub
 .endm
 
 .macro ISR_ERRCODE num
-	.global _isr\num
-	_isr\num:
-		cli
-		pushl $\num
-		jmp isr_common_stub
+  .global _isr\num
+  _isr\num:
+    cli
+    pushl $\num
+    jmp isr_common_stub
 .endm
 
 isr_common_stub:
-	pusha
-	pushl %ds
-	pushl %es
-	pushl %fs
-	pushl %gs
-	mov $0x10, %ax
-	mov %ax, %ds
-	mov %ax, %es
-	mov %ax, %fs
-	mov %ax, %gs
-	mov %esp, %eax
-	push %eax
-	// Call the C kernel hardware interrupt handler
-	call isrs_handler
-	popl %eax
-	popl %gs
-	popl %fs
-	popl %es
-	popl %ds
-	popa
-	add $8, %esp
-	iret
+  pusha
+  pushl %ds
+  pushl %es
+  pushl %fs
+  pushl %gs
+  mov $0x10, %ax
+  mov %ax, %ds
+  mov %ax, %es
+  mov %ax, %fs
+  mov %ax, %gs
+  mov %esp, %eax
+  push %eax
+  // Call the C kernel hardware interrupt handler
+  call isrs_handler
+  popl %eax
+  popl %gs
+  popl %fs
+  popl %es
+  popl %ds
+  popa
+  add $8, %esp
+  iret
 
 ISR_NOERRCODE 0
 ISR_NOERRCODE 1
