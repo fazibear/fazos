@@ -1,6 +1,9 @@
 #ifndef _IRQ_H
 #define _IRQ_H
 
+#include "system.h"
+#include "idt.h"
+
 /* These are own ISRs that point to our special IRQ handler
 *  instead of the regular 'fault_handler' function */
 extern void _irq0();

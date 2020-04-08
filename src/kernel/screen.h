@@ -1,6 +1,8 @@
 #ifndef _SCREEN_H
 #define _SCREEN_H
 
+#include "system.h"
+
 #define SCREEN_ADDRESS 0xB8000
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 25

@@ -1,4 +1,3 @@
-#include "system.h"
 #include "screen.h"
 
 unsigned short *screen_mem = (unsigned short*) SCREEN_ADDRESS;

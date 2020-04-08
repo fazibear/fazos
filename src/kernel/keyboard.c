@@ -1,9 +1,4 @@
-#include "system.h"
 #include "keyboard.h"
-#include "screen.h"
-#include "irq.h"
-#include "helpers.h"
-#include "stdbool.h"
 
 bool keyboard_shift = false;
 bool keyboard_alt = false;

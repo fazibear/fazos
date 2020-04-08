@@ -1,8 +1,4 @@
-#include "system.h"
 #include "timer.h"
-#include "irq.h"
-#include "screen.h"
-#include "helpers.h"
 
 unsigned long timer_ticks = 0;
 

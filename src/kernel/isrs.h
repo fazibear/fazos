@@ -1,6 +1,10 @@
 #ifndef _ISRS_H
 #define _ISRS_H
 
+#include "system.h"
+#include "idt.h"
+#include "screen.h"
+
 /* This is a simple string array. It contains the message that
 *  corresponds to each and every exception. We get the correct
 *  message by accessing like:

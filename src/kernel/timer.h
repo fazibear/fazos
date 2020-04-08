@@ -1,3 +1,12 @@
+#ifndef _TIMER_H
+#define _TIMER_H
+
+#include "system.h"
+#include "irq.h"
+#include "screen.h"
+#include "helpers.h"
+
+
 /* This will keep track of how many ticks that the system
 *  has been running for */
 unsigned long timer_ticks;
@@ -14,3 +23,5 @@ void timer_wait(int ticks);
 void timer_handler(struct regs *r);
 
 void timer_install();
+
+#endif

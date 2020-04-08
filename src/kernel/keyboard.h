@@ -1,11 +1,16 @@
-/* KBDUS means US Keyboard Layout. This is a scancode table
-*  used to layout a standard US keyboard. I have left some
-*  comments in to give you an idea of what key is what, even
-*  though I set it's array index to 0. You can change that to
-*  whatever you want using a macro, if you wish! */
+#ifndef _KEYBOARD_H
+#define _KEYBOARD_H
+
+#include "system.h"
+#include "screen.h"
+#include "irq.h"
+#include "helpers.h"
+#include "stdbool.h"
+
 unsigned char keyboard_chars[128];
 unsigned char keyboard_chars_shift[128];
 
 void keyboard_handler(struct regs *r);
 void keyboard_install();
 
+#endif

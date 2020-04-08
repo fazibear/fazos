@@ -1,4 +1,3 @@
-#include "system.h"
 #include "idt.h"
 
 /* Use this function to set an entry in the IDT. Alot simpler

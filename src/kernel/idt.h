@@ -1,6 +1,8 @@
 #ifndef _IDT_H
 #define _IDT_H
 
+#include "system.h"
+
 /* Defines an IDT entry */
 struct idt_entry {
   unsigned short base_lo;

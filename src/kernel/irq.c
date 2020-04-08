@@ -1,5 +1,3 @@
-#include "system.h"
-#include "idt.h"
 #include "irq.h"
 
 /* This array is actually an array of function pointers. We use

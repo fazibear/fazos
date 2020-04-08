@@ -1,6 +1,3 @@
-#include "system.h"
-#include "idt.h"
-#include "screen.h"
 #include "isrs.h"
 
 char *exception_messages[] = {
