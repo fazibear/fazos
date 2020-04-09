@@ -1,11 +1,8 @@
 CC ?= gcc
-AS ?= as
 LD ?= ld
 
-ASFLAGS += --32
 CFLAGS += -m32 -ffreestanding -O2 -Wall -Wextra
-LDFLAGS += 
-INCLUDES += -Ideps/mruby/include 
+LDFLAGS += -m elf_i386
 
 SRC_DIR = src
 DST_DIR = dst
@@ -19,7 +16,7 @@ all: clean $(KERNEL_OUT)
 
 $(KERNEL_OUT): $(KERNEL_DIR) $(KERNEL_OBJ)
 	@echo -e '[ \e[35mBIN\e[0m ] $(KERNEL_OUT)'
-	@$(LD) -o $(KERNEL_OUT) $(KERNEL_OBJ) $(LDFLAGS) -T src/kernel/link.ld -m elf_i386
+	@$(LD) -o $(KERNEL_OUT) $(KERNEL_OBJ) $(LDFLAGS) -T src/kernel/link.ld
 
 qemu: $(KERNEL_OUT)
 	qemu-system-i386 -kernel $(KERNEL_OUT)
@@ -28,7 +25,7 @@ qemu: $(KERNEL_OUT)
 
 $(DST_DIR)/%.o: $(SRC_DIR)/%.S
 	@echo -e '[ \e[33mASM\e[0m ] $< -> $@'
-	@$(AS) $(ASFLAGS) $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
 $(DST_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo -e '[ \e[34m C \e[0m ] $< -> $@'
