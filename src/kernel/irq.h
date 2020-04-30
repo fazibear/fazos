@@ -23,13 +23,8 @@ extern void _irq13();
 extern void _irq14();
 extern void _irq15();
 
-/* This array is actually an array of function pointers. We use
-*  this to handle custom IRQ handlers for a given IRQ */
-void *irq_routines[16];
-
 /* This installs a custom IRQ handler for the given IRQ */
 void irq_install_handler(int irq, void (*handler)(struct regs *r));
-
 
 /* This clears the handler for a given IRQ */
 void irq_uninstall_handler(int irq);

@@ -20,11 +20,6 @@ struct gdt_ptr {
   unsigned int base;
 } __attribute__((packed));
 
-/* Our GDT, with 3 entries, and finally our special GDT pointer */
-struct gdt_entry gdt[3];
-
-struct gdt_ptr gp;
-
 extern void _gdt_flush();
 
 void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran);

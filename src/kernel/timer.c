@@ -1,5 +1,7 @@
 #include "timer.h"
 
+/* This will keep track of how many ticks that the system
+*  has been running for */
 unsigned long timer_ticks = 0;
 
 void timer_handler(struct regs *r UNUSED ) {

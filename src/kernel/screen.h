@@ -27,12 +27,6 @@ enum screen_color {
   WHITE,
 };
 
-unsigned short* screen_mem;
-unsigned short screen_current;
-unsigned short screen_current_color;
-unsigned short screen_current_background_color;
-
-
 void screen_cls();
 void screen_new_line();
 void screen_print_char(char ch);

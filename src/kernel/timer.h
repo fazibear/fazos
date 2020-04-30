@@ -6,7 +6,6 @@
 #include "screen.h"
 #include "helpers.h"
 
-
 /* This will keep track of how many ticks that the system
 *  has been running for */
 unsigned long timer_ticks;

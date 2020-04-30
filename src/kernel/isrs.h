@@ -5,13 +5,7 @@
 #include "idt.h"
 #include "screen.h"
 
-/* This is a simple string array. It contains the message that
-*  corresponds to each and every exception. We get the correct
-*  message by accessing like:
-*  exception_message[interrupt_number] */
 #define EXCEPTION_MESSAGES_SIZE 32
-
-char *exception_messages[EXCEPTION_MESSAGES_SIZE];
 
 /* These are function prototypes for all of the exception
 *  handlers: The first 32 entries in the IDT are reserved

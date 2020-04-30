@@ -7,9 +7,6 @@
 #include "helpers.h"
 #include "stdbool.h"
 
-unsigned char keyboard_chars[128];
-unsigned char keyboard_chars_shift[128];
-
 void keyboard_handler(struct regs *r);
 void keyboard_install();
 
