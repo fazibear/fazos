@@ -1,5 +1,5 @@
 /* entry point of our kernel */
-ENTRY(_start)
+ENTRY(start)
 
 SECTIONS
 {

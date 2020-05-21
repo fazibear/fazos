@@ -15,37 +15,21 @@
 .long FLAGS
 .long CHECKSUM
 
-
-# set the stack bottom
-stackBottom:
-# define the maximum size of stack to 512 bytes
-.skip 1024
-
-
-# set the stack top which grows from higher to lower
-
-stackTop:
-
 .section .text
-.global _start
-.type _start, @function
 
+.global start
+.type start, @function
 
-_start:
+start:
+  mov $0x80000, %esp // Setup the stack
 
-  # assign current stack pointer location to stackTop
-	mov $stackTop, %esp
+  push %ebx // Pass multiboot info structure
+  push %eax // Pass multiboot magic code
 
-  # call the kernel main source
-	call main
+  call main // Call the kernel
 
-	cli
+  cli
 
-
-# put system in infinite loop
-hltLoop:
-
-	hlt
-	jmp hltLoop
-
-.size _start, . - _start
+sti_loop:
+  sti
+  jmp sti_loop
