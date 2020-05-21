@@ -13,7 +13,7 @@ void interrupt_register_handler(int irq, void (*handler)(struct isr_regs *r)) {
 }
 
 /* This clears the handler for a given IRQ */
-void interrupt_inregister_handler(int irq) {
+void interrupt_unregister_handler(int irq) {
   interrupt_routines[irq] = 0;
 }
 

@@ -3,12 +3,13 @@
 #include "idt.h"
 #include "isr.h"
 
-int main() {
+#include "timer.h"
+
+void main() {
   vga_init();
   gdt_init();
   idt_init();
   isr_init();
 
-  for (;;)
-    ;
+  timer_init();
 }
