@@ -28,7 +28,7 @@ enum VGA_COLOR {
 void vga_init();
 void vga_clear();
 unsigned short vga_screen_entry(char);
-void vga_set_background_color(enum VGA_COLOR);
+void vga_set_background(enum VGA_COLOR);
 void vga_set_foreground(enum VGA_COLOR);
 void vga_print_char(char);
 void vga_print_string(char*);

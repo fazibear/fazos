@@ -44,7 +44,7 @@ void vga_clear() {
   vga_current_position = 0;
 }
 
-void vga_set_background_color(enum VGA_COLOR color) {
+void vga_set_background(enum VGA_COLOR color) {
   vga_current_backgroud = color;
 }
 
