@@ -1,45 +1,7 @@
 #include "isr.h"
 #include "idt.h"
-#include "system.h"
-#include "vga.h"
-
-char *isr_exception_messages[] = {
-  "Division By Zero",
-  "Debug",
-  "Non Maskable Interrupt",
-  "Breakpoint",
-  "Into Detected Overflow",
-  "Out of Bounds",
-  "Invalid Opcode",
-  "No Coprocessor",
-
-  "Double Fault",
-  "Coprocessor Segment Overrun",
-  "Bad TSS",
-  "Segment Not Present",
-  "Stack Fault",
-  "General Protection Fault",
-  "Page Fault",
-  "Unknown Interrupt",
-
-  "Coprocessor Fault",
-  "Alignment Check",
-  "Machine Check",
-  "Reserved",
-  "Reserved",
-  "Reserved",
-  "Reserved",
-  "Reserved",
-
-  "Reserved",
-  "Reserved",
-  "Reserved",
-  "Reserved",
-  "Reserved",
-  "Reserved",
-  "Reserved",
-  "Reserved"
-};
+#include "exception.h"
+#include "interrupt.h"
 
 /* All of our Exception handling Interrupt Service Routines will
 *  point to this function. This will tell us what exception has
@@ -47,12 +9,12 @@ char *isr_exception_messages[] = {
 *  endless loop. All isrs disable interrupts while they are being
 *  serviced as a 'locking' mechanism to prevent an IRQ from
 *  happening and messing up kernel data structures */
-void isr_handler(struct isr_regs *r) {
-  vga_set_background(VGA_COLOR_RED);
-  vga_set_foreground(VGA_COLOR_WHITE);
-  vga_print_string(isr_exception_messages[r->int_no]);
-  vga_print_string(" Exception. System Halted!\n");
-  for (;;);
+void isr_handler(struct isr_regs *context) {
+  if (context->int_no > 31) {
+    interrupt_handler(context);
+  } else {
+    exception_handler(context);
+  }
 }
 
 void isr_init() {
@@ -88,17 +50,7 @@ void isr_init() {
   idt_set_gate(30, (unsigned)isr30, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
   idt_set_gate(31, (unsigned)isr31, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
 
-  // itq remap
-  outportb(0x20, 0x11);
-  outportb(0xA0, 0x11);
-  outportb(0x21, 0x20);
-  outportb(0xA1, 0x28);
-  outportb(0x21, 0x04);
-  outportb(0xA1, 0x02);
-  outportb(0x21, 0x01);
-  outportb(0xA1, 0x01);
-  outportb(0x21, 0x0);
-  outportb(0xA1, 0x0);
+  interrupt_remap();
 
   idt_set_gate(32, (unsigned)isr32, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
   idt_set_gate(33, (unsigned)isr33, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
