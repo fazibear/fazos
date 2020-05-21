@@ -4,7 +4,7 @@ struct gdt_entry gdt[3];
 struct gdt_register gdt_pointer;
 
 void gdt_init() {
-  gdt_pointer.limit = sizeof(gdt) - 1;
+  gdt_pointer.limit = sizeof(gdt);
   gdt_pointer.base = (unsigned int) &gdt;
 
   gdt_set_entry(0, 0, 0, 0, 0);
