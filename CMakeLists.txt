@@ -7,6 +7,7 @@ SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 ADD_SUBDIRECTORY (src/kernel)
 
 ADD_CUSTOM_TARGET (qemu
+  DEPENDS kernel
   COMMAND qemu-system-i386 -kernel ${EXECUTABLE_OUTPUT_PATH}/kernel -d unimp
   VERBATIM
 )
