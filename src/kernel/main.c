@@ -4,6 +4,7 @@
 #include "isr.h"
 
 #include "timer.h"
+#include "printf.h"
 
 void main() {
   vga_init();

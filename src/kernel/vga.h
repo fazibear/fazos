@@ -35,4 +35,7 @@ void vga_print_string(char*);
 void vga_update_cursor();
 void vga_screen_scroll();
 
+int vga_printf(const char *format, ...);
+int vga_sprintf(char *out, const char *format, ...);
+
 #endif
