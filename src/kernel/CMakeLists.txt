@@ -1,4 +1,4 @@
-SET (CMAKE_C_FLAGS "-m32 -ffreestanding -O2 -Wall -Wextra")
+SET (CMAKE_C_FLAGS "-m32 -ffreestanding -O2 -Wall -Wextra -mno-sse")
 SET (CMAKE_EXE_LINKER_FLAGS "-T link.ld -m elf_i386 -nostdlib")
 SET (CMAKE_C_LINK_EXECUTABLE "<CMAKE_LINKER> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
 
