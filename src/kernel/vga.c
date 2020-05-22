@@ -36,7 +36,6 @@ void vga_init() {
   vga_print_string("*\n\n");
 
   vga_set_foreground(VGA_COLOR_WHITE);
-  vga_print_string("READY.\n");;
 }
 
 void vga_clear() {

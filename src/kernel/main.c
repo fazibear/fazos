@@ -3,14 +3,23 @@
 #include "idt.h"
 #include "isr.h"
 
-#include "timer.h"
 #include "printf.h"
+#include "timer.h"
 
-void main() {
+#include "multiboot.h"
+
+void main(unsigned int magic, struct multiboot_info* info) {
   vga_init();
   gdt_init();
   idt_init();
   isr_init();
 
   timer_init();
+
+  vga_set_foreground(VGA_COLOR_GREY);
+  vga_printf("Magic Value: %x\n", magic);
+  vga_printf("Bootloader name: %s\n", info->boot_loader_name);
+
+  vga_set_foreground(VGA_COLOR_WHITE);
+  vga_print_string("READY.\n");;
 }
