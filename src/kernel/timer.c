@@ -11,7 +11,7 @@ unsigned long timer_ticks = 0;
 *  timer fires. By default, the timer fires 18.222 times
 *  per second. Why 18.222Hz? Some engineer at IBM must've
 *  been smoking something funky */
-void timer_handler() {
+void timer_handler(__attribute__((unused)) struct isr_regs *r) {
   /* Increment our 'tick count' */
   timer_ticks++;
 }
