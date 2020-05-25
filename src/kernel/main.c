@@ -25,6 +25,8 @@ void main(unsigned int magic, struct multiboot_info* info) {
   vga_printf("Magic Value: %x\n", magic);
   vga_printf("Bootloader name: %s\n", info->boot_loader_name);
 
+  LOG("dupa %s", "sdfsdf");
+
   vga_set_foreground(VGA_COLOR_WHITE);
   vga_print_string("READY.\n");;
 }

@@ -10,14 +10,13 @@
 unsigned int* pmem_free_pages = (unsigned int*)PMEM_FREE_PAGES_START;
 
 void pmem_init(struct multiboot_info* info) {
-
   struct multiboot_mmap_entry* memory_map_pointer = (struct multiboot_mmap_entry*)info->mmap_addr;
   int mmap_entries = info->mmap_length / sizeof(struct multiboot_mmap_entry);
 
-  for(int i = 0; i < mmap_entries; i++){
-    if(memory_map_pointer->type == MULTIBOOT_MEMORY_AVAILABLE){
-        vga_printf("Memory map freee: %x\n", memory_map_pointer->len);
-      }
+  for(int i = 0; i < mmap_entries; i++) {
+    if(memory_map_pointer->type == MULTIBOOT_MEMORY_AVAILABLE) {
+      vga_printf("Memory map freee: %x\n", memory_map_pointer->len);
+    }
     memory_map_pointer++;
   }
 
@@ -35,17 +34,17 @@ void pmem_free_pages_add(unsigned int addr) {
 }
 
 unsigned long long pmem_free_pages_del() {
-  if(pmem_free_pages > (unsigned int *)PMEM_FREE_PAGES_START){
+  if(pmem_free_pages > (unsigned int *)PMEM_FREE_PAGES_START) {
     unsigned long long addr = *pmem_free_pages;
     pmem_free_pages--;
     return addr;
-  }else{
+  } else {
     return 0;
     //out of memory
   }
 }
 
 unsigned long long page_align(unsigned long long address) {
-    return (address + PAGE_SIZE - 1) & (-PAGE_SIZE + 1);
+  return (address + PAGE_SIZE - 1) & (-PAGE_SIZE + 1);
 }
 
