@@ -93,10 +93,10 @@ void vga_print_string(char* string) {
 }
 
 void vga_update_cursor() {
-  outportb(0x3D4, 0x0F);
-  outportb(0x3D5, vga_current_position);
-  outportb(0x3D4, 0x0E);
-  outportb(0x3D5, vga_current_position >> 8);
+  port_outb(0x3D4, 0x0F);
+  port_outb(0x3D5, vga_current_position);
+  port_outb(0x3D4, 0x0E);
+  port_outb(0x3D5, vga_current_position >> 8);
 }
 
 void vga_screen_scroll() {
