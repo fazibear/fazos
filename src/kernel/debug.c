@@ -1,5 +1,5 @@
-#include "debug.h"
 #include "serial.h"
+#include "debug.h"
 
 static void debug_print_char(char **str, int c);
 static int debug_prints(char **out, const char *string, int width, int pad);
@@ -8,7 +8,7 @@ static int debug_print(char **out, int *varg);
 
 void debug_init() {
   serial_init(SERIAL_COM1);
-  serial_write_string(SERIAL_COM1, "DEBUG INITIALIZED !");
+  DEBUG("*** DEBUG INITIALIZED *** %s", "X");
 }
 
 int debug_printf(const char *format, ...) {

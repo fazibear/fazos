@@ -10,6 +10,8 @@
 #include "debug.h"
 
 void main(unsigned int magic, struct multiboot_info* info) {
+  debug_init();
+
   vga_init();
   vga_set_foreground(VGA_COLOR_GREY);
 

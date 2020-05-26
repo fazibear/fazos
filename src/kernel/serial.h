@@ -2,10 +2,10 @@
 #define _SERIAL_H
 
 enum serial_port {
-    SERIAL_COM1 = 0x3F8,
-    SERIAL_COM2 = 0x2F8,
-    SERIAL_COM3 = 0x3E8,
-    SERIAL_COM4 = 0x2E8,
+  SERIAL_COM1 = 0x3F8,
+  SERIAL_COM2 = 0x2F8,
+  SERIAL_COM3 = 0x3E8,
+  SERIAL_COM4 = 0x2E8,
 };
 
 char serial_read_char(enum serial_port port);
