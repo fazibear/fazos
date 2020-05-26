@@ -31,6 +31,16 @@
         __func__, \
         ##__VA_ARGS__)
 
+#define DEBUG_INIT_START() \
+    debug_printf(DEBUG_YELLOW"[%15s:%-3d] "DEBUG_BLUE"%s(): "DEBUG_RESET "*** INITIALIZING ***" DEBUG_RESET"\n", \
+        __FILENAME__, __LINE__,\
+        __func__)
+
+#define DEBUG_INIT_END() \
+    debug_printf(DEBUG_YELLOW"[%15s:%-3d] "DEBUG_BLUE"%s(): "DEBUG_RESET "*** INITIALIZED! ***" DEBUG_RESET"\n", \
+        __FILENAME__, __LINE__,\
+        __func__)
+
 void debug_init();
 int debug_printf(const char *format, ...);
 int debug_sprintf(char *out, const char *format, ...);

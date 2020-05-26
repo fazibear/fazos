@@ -1,6 +1,7 @@
 #include "timer.h"
 #include "isr.h"
 #include "interrupt.h"
+#include "debug.h"
 
 /* This will keep track of how many ticks that the system
 *  has been running for */
@@ -28,6 +29,8 @@ void timer_wait(int ticks) {
 /* Sets up the system clock by installing the timer handler
 *  into IRQ0 */
 void timer_init() {
+  DEBUG_INIT_START();
   /* Installs 'timer_handler' to IRQ0 */
   interrupt_register_handler(0, timer_handler);
+  DEBUG_INIT_END();
 }

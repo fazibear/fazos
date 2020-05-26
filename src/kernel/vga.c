@@ -1,5 +1,6 @@
 #include "vga.h"
 #include "system.h"
+#include "debug.h"
 
 unsigned short *vga_video_memory = (unsigned short*) 0xb8000;
 unsigned int vga_current_position = 0;
@@ -8,6 +9,7 @@ enum VGA_COLOR vga_current_backgroud = VGA_COLOR_BLACK;
 enum VGA_COLOR vga_current_foreground = VGA_COLOR_WHITE;
 
 void vga_init() {
+  DEBUG_INIT_START();
   vga_clear();
   vga_print_string("\n                           ");
   vga_set_foreground(VGA_COLOR_YELLOW);
@@ -36,6 +38,7 @@ void vga_init() {
   vga_print_string("*\n\n");
 
   vga_set_foreground(VGA_COLOR_WHITE);
+  DEBUG_INIT_END();
 }
 
 void vga_clear() {

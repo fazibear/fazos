@@ -10,6 +10,7 @@
 unsigned int* pmem_free_pages = (unsigned int*)PMEM_FREE_PAGES_START;
 
 void pmem_init(struct multiboot_info* info) {
+  DEBUG_INIT_START();
   struct multiboot_mmap_entry* memory_map_pointer = (struct multiboot_mmap_entry*)info->mmap_addr;
   int mmap_entries = info->mmap_length / sizeof(struct multiboot_mmap_entry);
 
@@ -26,6 +27,8 @@ void pmem_init(struct multiboot_info* info) {
   DEBUG("Memory size: %d", sizeof(struct multiboot_mmap_entry));
 
   DEBUG("Memory free stack: %d", pmem_free_pages);
+
+  DEBUG_INIT_END();
 }
 
 void pmem_free_pages_add(unsigned int addr) {
