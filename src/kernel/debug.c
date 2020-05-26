@@ -8,7 +8,7 @@ static int debug_print(char **out, int *varg);
 
 void debug_init() {
   serial_init(SERIAL_COM1);
-  //DEBUG("*** DEBUG INITIALIZED *** %s", "X");
+  DEBUG("*** DEBUG INITIALIZED ***");
 }
 
 int debug_printf(const char *format, ...) {

@@ -29,7 +29,7 @@
     debug_printf(DEBUG_YELLOW"[%15s:%-3d] "DEBUG_BLUE"%s(): "DEBUG_RESET FORMAT DEBUG_RESET"\n", \
         __FILENAME__, __LINE__,\
         __func__, \
-        __VA_ARGS__)
+        ##__VA_ARGS__)
 
 void debug_init();
 int debug_printf(const char *format, ...);
