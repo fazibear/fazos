@@ -3,33 +3,42 @@
 #include "multiboot.h"
 #include "debug.h"
 
-#define PMEM_FREE_PAGES_START 0x200000
+#define PMEM_FREE_PAGES_START (unsigned int*)0x200000
 #define PMEM_FREE_PAGES_END 0x300000
 #define PAGE_SIZE 4096
 
-unsigned int* pmem_free_pages = (unsigned int*)PMEM_FREE_PAGES_START;
+unsigned int* pmem_free_pages = PMEM_FREE_PAGES_START;
+
+unsigned long pmem_free_asd() {
+  return pmem_free_pages - PMEM_FREE_PAGES_START;
+}
 
 void pmem_init(struct multiboot_info* info) {
   DEBUG_INIT_START();
+  unsigned long free_memory = 0;
+
   struct multiboot_mmap_entry* memory_map_pointer = (struct multiboot_mmap_entry*)info->mmap_addr;
   int mmap_entries = info->mmap_length / sizeof(struct multiboot_mmap_entry);
 
+
   for(int i = 0; i < mmap_entries; i++) {
     if(memory_map_pointer->type == MULTIBOOT_MEMORY_AVAILABLE) {
-      DEBUG("Memory map freee: %x", memory_map_pointer->len);
+      free_memory += memory_map_pointer-> len;
+      for(unsigned long address = memory_map_pointer->addr; address < memory_map_pointer->addr + memory_map_pointer->len; address+=PAGE_SIZE) {
+        if(address > PMEM_FREE_PAGES_END) {
+          pmem_free_pages_add(page_align(address));
+        }
+      }
     }
     memory_map_pointer++;
   }
 
-  DEBUG("Memory map addr: %x", info->mmap_addr);
-  DEBUG("Memory map length: %d", info->mmap_length);
-  DEBUG("Memory map end: %x", info->mmap_addr + info->mmap_length);
-  DEBUG("Memory size: %d", sizeof(struct multiboot_mmap_entry));
-
-  DEBUG("Memory free stack: %d", pmem_free_pages);
+  DEBUG("Memory free: %d MB", free_memory / 1024 / 1024);
+  DEBUG("Memory free: %d pages", pmem_free_pages - PMEM_FREE_PAGES_START);
 
   DEBUG_INIT_END();
 }
+
 
 void pmem_free_pages_add(unsigned int addr) {
   *pmem_free_pages = addr;
@@ -42,12 +51,12 @@ unsigned long long pmem_free_pages_del() {
     pmem_free_pages--;
     return addr;
   } else {
+    ERROR("OUT OF MEMORY");
     return 0;
-    //out of memory
   }
 }
 
-unsigned long long page_align(unsigned long long address) {
+unsigned long page_align(unsigned long address) {
   return (address + PAGE_SIZE - 1) & (-PAGE_SIZE + 1);
 }
 
