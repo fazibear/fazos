@@ -4,11 +4,10 @@
 #include "isr.h"
 
 #include "pmem.h"
-
-#include "printf.h"
 #include "timer.h"
 
 #include "multiboot.h"
+#include "debug.h"
 
 void main(unsigned int magic, struct multiboot_info* info) {
   vga_init();
@@ -22,11 +21,9 @@ void main(unsigned int magic, struct multiboot_info* info) {
 
   timer_init();
 
-  vga_printf("Magic Value: %x\n", magic);
-  vga_printf("Bootloader name: %s\n", info->boot_loader_name);
-
-  LOG("dupa %s", "sdfsdf");
-
   vga_set_foreground(VGA_COLOR_WHITE);
   vga_print_string("READY.\n");;
+
+  DEBUG("Magic Value: %x", magic);
+  DEBUG("Bootloader name: %s", info->boot_loader_name);
 }

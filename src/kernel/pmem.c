@@ -1,7 +1,7 @@
 #include "pmem.h"
 
 #include "multiboot.h"
-#include "vga.h"
+#include "debug.h"
 
 #define PMEM_FREE_PAGES_START 0x200000
 #define PMEM_FREE_PAGES_END 0x300000
@@ -15,17 +15,17 @@ void pmem_init(struct multiboot_info* info) {
 
   for(int i = 0; i < mmap_entries; i++) {
     if(memory_map_pointer->type == MULTIBOOT_MEMORY_AVAILABLE) {
-      vga_printf("Memory map freee: %x\n", memory_map_pointer->len);
+      DEBUG("Memory map freee: %x", memory_map_pointer->len);
     }
     memory_map_pointer++;
   }
 
-  vga_printf("Memory map addr: %x\n", info->mmap_addr);
-  vga_printf("Memory map length: %d\n", info->mmap_length);
-  vga_printf("Memory map end: %x\n", info->mmap_addr + info->mmap_length);
-  vga_printf("Memory size: %d\n", sizeof(struct multiboot_mmap_entry));
+  DEBUG("Memory map addr: %x", info->mmap_addr);
+  DEBUG("Memory map length: %d", info->mmap_length);
+  DEBUG("Memory map end: %x", info->mmap_addr + info->mmap_length);
+  DEBUG("Memory size: %d", sizeof(struct multiboot_mmap_entry));
 
-  vga_printf("Memory free stack: %d\n", pmem_free_pages);
+  DEBUG("Memory free stack: %d", pmem_free_pages);
 }
 
 void pmem_free_pages_add(unsigned int addr) {
