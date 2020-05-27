@@ -1,4 +1,4 @@
-SET (CMAKE_C_FLAGS "-m32 -ffreestanding -O2 -Wall -Wextra -mno-sse")
+SET (CMAKE_C_FLAGS "-fPIC -m32 -ffreestanding -O2 -Wall -Wextra -mno-sse -DPRINTF_DISABLE_SUPPORT_LONG_LONG")
 SET (CMAKE_EXE_LINKER_FLAGS "-T link.ld -m elf_i386 -nostdlib")
 SET (CMAKE_C_LINK_EXECUTABLE "<CMAKE_LINKER> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
 
@@ -9,6 +9,8 @@ ENDIF ()
 
 FILE (GLOB C_SOURCES "*.c")
 FILE (GLOB S_SOURCES "*.s")
+
+SET (C_SOURCES "${C_SOURCES};${printf_SOURCE_DIR}/printf.c")
 
 SET_PROPERTY (SOURCE ${S_SOURCES} PROPERTY LANGUAGE C)
 
