@@ -12,12 +12,11 @@ FETCHCONTENT_DECLARE (
   printf
   GIT_REPOSITORY "https://github.com/mpaland/printf.git"
   GIT_TAG "v4.0.0"
-  )
+)
 
 MESSAGE (STATUS "printf downloading ...")
 FETCHCONTENT_POPULATE (printf)
 MESSAGE (STATUS "printf source dir: ${printf_SOURCE_DIR}")
-SET(printf_SOURCE_DIR ${printf_SOURCE_DIR} CACHE INTERNAL "")
 
 # Build parts
 
