@@ -8,6 +8,7 @@
 
 #include "multiboot.h"
 #include "debug.h"
+#include "test.h"
 
 void main(unsigned int magic, struct multiboot_info* info) {
   debug_init();
@@ -27,5 +28,7 @@ void main(unsigned int magic, struct multiboot_info* info) {
   timer_init();
 
   vga_set_foreground(VGA_COLOR_WHITE);
-  vga_print_string("READY.\n");;
+  vga_print_string("READY.\n");
+
+  test_debug();
 }

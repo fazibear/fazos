@@ -22,8 +22,6 @@ void pmem_init(struct multiboot_info* info) {
 
   for(int i = 0; i < mmap_entries; i++) {
     if(memory_map_pointer->type == MULTIBOOT_MEMORY_AVAILABLE) {
-      DEBUG("%ld %ld", memory_map_pointer->len, memory_map_pointer->addr);
-      DEBUG("%ld", memory_map_pointer->addr);
       free_memory += memory_map_pointer->len;
       for(unsigned long address = memory_map_pointer->addr; address < memory_map_pointer->addr + memory_map_pointer->len; address+=PAGE_SIZE) {
         if(address > PMEM_FREE_PAGES_END) {
