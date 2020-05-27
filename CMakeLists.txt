@@ -6,22 +6,17 @@ SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 
 # Deps
 
-INCLUDE(FetchContent)
+INCLUDE (FetchContent)
 
-FetchContent_Declare(
+FETCHCONTENT_DECLARE (
   printf
   GIT_REPOSITORY "https://github.com/mpaland/printf.git"
   GIT_TAG "v4.0.0"
   )
 
-FetchContent_GetProperties(printf) #mispelled name in original post
-
-if(NOT printf_POPULATED)   # name is lowercased
-  FetchContent_Populate(printf)
-  message(STATUS "printf source dir: ${printf_SOURCE_DIR}")
-  message(STATUS "printf binary dir: ${printf_BINARY_DIR}")
-endif()
-
+MESSAGE (STATUS "printf downloading ...")
+FETCHCONTENT_POPULATE (printf)
+MESSAGE (STATUS "printf source dir: ${printf_SOURCE_DIR}")
 SET(printf_SOURCE_DIR ${printf_SOURCE_DIR} CACHE INTERNAL "")
 
 # Build parts
