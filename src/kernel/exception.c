@@ -1,6 +1,7 @@
 #include "isr.h"
 #include "vga.h"
 #include "exception.h"
+#include "debug.h"
 
 char *exception_messages[] = {
   "Division By Zero",
@@ -41,9 +42,16 @@ char *exception_messages[] = {
 };
 
 void exception_handler(struct isr_regs *context) {
+  ERROR("Exception: %s", exception_messages[context->int_no]);
   vga_set_background(VGA_COLOR_RED);
   vga_set_foreground(VGA_COLOR_WHITE);
+  vga_clear();
+  vga_set_background(VGA_COLOR_WHITE);
+  vga_set_foreground(VGA_COLOR_RED);
+  vga_print_string("\n                                 System Halted!                                 \n");
+  vga_set_background(VGA_COLOR_RED);
+  vga_set_foreground(VGA_COLOR_WHITE);
+  vga_print_string("Exception: ");
   vga_print_string(exception_messages[context->int_no]);
-  vga_print_string(" Exception. System Halted!\n");
   for (;;);
 }
