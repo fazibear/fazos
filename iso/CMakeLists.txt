@@ -1,16 +1,15 @@
 SET (ISO_DIR ${EXECUTABLE_OUTPUT_PATH}/iso)
 SET (ISO_BOOT_DIR ${ISO_DIR}/boot)
 SET (ISO_GRUB_DIR ${ISO_BOOT_DIR}/grub)
-SET (ISO_IMG ${EXECUTABLE_OUTPUT_PATH}/fazigos.img CACHE INTERNAL ISO_IMG)
+SET (ISO_IMG ${EXECUTABLE_OUTPUT_PATH}/fazigos.iso CACHE INTERNAL ISO_IMG)
 
-ADD_CUSTOM_TARGET (iso
+ADD_CUSTOM_COMMAND (OUTPUT ${ISO_IMG}
+  COMMAND mkdir -p ${ISO_GRUB_DIR}
+  COMMAND cp grub.cfg ${ISO_GRUB_DIR}
+  COMMAND cp ${EXECUTABLE_OUTPUT_PATH}/kernel ${ISO_BOOT_DIR}
+  COMMAND i386-elf-grub-mkrescue -o ${ISO_IMG} ${ISO_DIR}
   DEPENDS kernel
-  COMMAND
-    mkdir -p ${ISO_GRUB_DIR} &&
-    cp grub.cfg ${ISO_GRUB_DIR} &&
-    cp ${EXECUTABLE_OUTPUT_PATH}/kernel ${ISO_BOOT_DIR} &&
-    i386-elf-grub-mkrescue -o ${ISO_IMG} ${ISO_DIR}
   VERBATIM
 )
 
-
+add_custom_target(iso ALL DEPENDS ${ISO_IMG})

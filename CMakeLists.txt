@@ -35,11 +35,10 @@ ADD_CUSTOM_TARGET (qemu
 )
 
 ADD_CUSTOM_TARGET (qemug
-  DEPENDS kernel iso
+  DEPENDS iso
   COMMAND qemu-system-x86_64 -drive file=${ISO_IMG},format=raw,index=0,media=disk ${QEMU_PARAMS}
   VERBATIM
 )
-
 
 ADD_CUSTOM_TARGET (format
   COMMAND astyle -n --style=google -s2 --recursive ./*.c,*.h --exclude=CMakeFiles
