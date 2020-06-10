@@ -20,15 +20,26 @@ MESSAGE (STATUS "printf source dir: ${printf_SOURCE_DIR}")
 
 # Build parts
 
+ADD_SUBDIRECTORY (iso)
 ADD_SUBDIRECTORY (src/kernel)
+
+
+SET (QEMU_PARAMS -d unimp -serial stdio)
 
 # Additional make commands
 
 ADD_CUSTOM_TARGET (qemu
   DEPENDS kernel
-  COMMAND qemu-system-i386 -kernel ${EXECUTABLE_OUTPUT_PATH}/kernel -d unimp -serial stdio
+  COMMAND qemu-system-i386 -kernel ${KERNEL_BIN} ${QEMU_PARAMS}
   VERBATIM
 )
+
+ADD_CUSTOM_TARGET (qemug
+  DEPENDS kernel iso
+  COMMAND qemu-system-x86_64 -drive file=${ISO_IMG},format=raw,index=0,media=disk ${QEMU_PARAMS}
+  VERBATIM
+)
+
 
 ADD_CUSTOM_TARGET (format
   COMMAND astyle -n --style=google -s2 --recursive ./*.c,*.h --exclude=CMakeFiles
