@@ -12,4 +12,4 @@ ADD_CUSTOM_COMMAND (OUTPUT ${ISO_IMG}
   VERBATIM
 )
 
-add_custom_target(iso ALL DEPENDS ${ISO_IMG})
+add_custom_target(iso DEPENDS ${ISO_IMG})
