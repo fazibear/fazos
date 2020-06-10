@@ -42,7 +42,15 @@ char *exception_messages[] = {
 };
 
 void exception_handler(struct isr_regs *context) {
-  ERROR("Exception: %s", exception_messages[context->int_no]);
+  /* struct isr_regs { */
+  /*   unsigned int gs, fs, es, ds;      #<{(| pushed the segs last |)}># */
+  /*   unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;  #<{(| pushed by 'pusha' |)}># */
+  /*   unsigned int int_no, err_code;    #<{(| our 'push byte #' and ecodes do this |)}># */
+  /*   unsigned int eip, cs, eflags, useresp, ss;   #<{(| pushed by the processor automatically |)}># */
+  /* }; */
+
+  ERROR("Exception: %s (int_no=%d err_code=%d eip=%d)", exception_messages[context->int_no], context->int_no, context->err_code, context->eip);
+
   vga_set_background(VGA_COLOR_RED);
   vga_set_foreground(VGA_COLOR_WHITE);
   vga_clear();

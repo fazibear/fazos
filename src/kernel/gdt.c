@@ -20,15 +20,15 @@ void gdt_init() {
 /* Setup a descriptor in the Global Descriptor Table */
 void gdt_set_entry(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran) {
   /* Setup the descriptor base address */
-  gdt[num].base_low = base;
-  gdt[num].base_middle = base >> 16;
-  gdt[num].base_high = base >> 24;
+  gdt[num].base_low = (base & 0xFFFF);
+  gdt[num].base_middle = ((base >> 16) & 0xFF);
+  gdt[num].base_high = ((base >> 24) & 0xFF);
 
   /* Setup the descriptor limits */
-  gdt[num].limit_low = limit;
-  gdt[num].limit_high_flags = limit >> 16;
+  gdt[num].limit_low = (limit & 0xFFFF);
+  gdt[num].limit_high_flags = ((limit >> 16) & 0x0F);
 
   /* Finally, set up the flags */
-  gdt[num].limit_high_flags |= gran << 4;
+  gdt[num].limit_high_flags |= (gran << 4);
   gdt[num].access = access;
 }
