@@ -15,6 +15,10 @@ unsigned long timer_ticks = 0;
 void timer_handler(__attribute__((unused)) struct isr_regs *r) {
   /* Increment our 'tick count' */
   timer_ticks++;
+
+  if(timer_ticks % 60 == 0) {
+    DEBUG("Timer ticks: %ld", timer_ticks);
+  }
 }
 
 /* This will continuously loop until the given time has
