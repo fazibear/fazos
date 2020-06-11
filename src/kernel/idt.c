@@ -6,14 +6,14 @@ struct idt_entry idt[256];
 struct idt_register idt_pointer;
 
 void idt_init() {
-  DEBUG_INIT_START();
+  INIT_START();
   memset(&idt, 0, sizeof(idt));
 
   idt_pointer.limit = sizeof(idt);
   idt_pointer.base = (unsigned int) &idt;
 
   lidt(&idt_pointer);
-  DEBUG_INIT_END();
+  INIT_END();
 }
 
 /* Use this function to set an entry in the IDT. Alot simpler

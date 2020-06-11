@@ -9,7 +9,7 @@ enum VGA_COLOR vga_current_backgroud = VGA_COLOR_BLACK;
 enum VGA_COLOR vga_current_foreground = VGA_COLOR_WHITE;
 
 void vga_init() {
-  DEBUG_INIT_START();
+  INIT_START();
   vga_clear();
   vga_print_string("\n                           ");
   vga_set_foreground(VGA_COLOR_YELLOW);
@@ -38,7 +38,7 @@ void vga_init() {
   vga_print_string("*\n\n");
 
   vga_set_foreground(VGA_COLOR_WHITE);
-  DEBUG_INIT_END();
+  INIT_END();
 }
 
 void vga_clear() {

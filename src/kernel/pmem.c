@@ -14,7 +14,7 @@ unsigned long pmem_free_asd() {
 }
 
 void pmem_init(struct multiboot_info* info) {
-  DEBUG_INIT_START();
+  INIT_START();
   unsigned long free_memory = 0;
 
   struct multiboot_mmap_entry* memory_map_pointer = (struct multiboot_mmap_entry*)info->mmap_addr;
@@ -25,7 +25,7 @@ void pmem_init(struct multiboot_info* info) {
       free_memory += memory_map_pointer->len;
       for(unsigned long address = memory_map_pointer->addr; address < memory_map_pointer->addr + memory_map_pointer->len; address+=PAGE_SIZE) {
         if(address > PMEM_FREE_PAGES_END) {
-          // DEBUG("Free page at 0x%x", page_align(address));
+          // INFO("Free page at 0x%x", page_align(address));
           pmem_free_pages_add(page_align(address));
         }
       }
@@ -33,10 +33,10 @@ void pmem_init(struct multiboot_info* info) {
     memory_map_pointer++;
   }
 
-  DEBUG("Memory free: %d MB", free_memory / 1024 / 1024);
-  DEBUG("Memory free: %d pages", pmem_free_pages - PMEM_FREE_PAGES_START);
+  INFO("Memory free: %d MB", free_memory / 1024 / 1024);
+  INFO("Memory free: %d pages", pmem_free_pages - PMEM_FREE_PAGES_START);
 
-  DEBUG_INIT_END();
+  INIT_END();
 }
 
 

@@ -17,7 +17,7 @@ void timer_handler(__attribute__((unused)) struct isr_regs *r) {
   timer_ticks++;
 
   if(timer_ticks % 60 == 0) {
-    DEBUG("Timer ticks: %ld", timer_ticks);
+    INFO("Timer ticks: %ld", timer_ticks);
   }
 }
 
@@ -33,8 +33,8 @@ void timer_wait(int ticks) {
 /* Sets up the system clock by installing the timer handler
 *  into IRQ0 */
 void timer_init() {
-  DEBUG_INIT_START();
+  INIT_START();
   /* Installs 'timer_handler' to IRQ0 */
   interrupt_register_handler(0, timer_handler);
-  DEBUG_INIT_END();
+  INIT_END();
 }

@@ -19,7 +19,7 @@ void isr_handler(struct isr_regs *context) {
 }
 
 void isr_init() {
-  DEBUG_INIT_START();
+  INIT_START();
   idt_set_gate(1, (unsigned)isr1, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
   idt_set_gate(2, (unsigned)isr2, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
   idt_set_gate(3, (unsigned)isr3, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
@@ -70,6 +70,6 @@ void isr_init() {
   idt_set_gate(45, (unsigned)isr45, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
   idt_set_gate(46, (unsigned)isr46, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
   idt_set_gate(47, (unsigned)isr47, ISR_KERNEL_CODE, IDT_GATE_INTERRUPT);
-  DEBUG_INIT_END();
+  INIT_END();
 }
 

@@ -13,8 +13,8 @@
 void main(unsigned int magic, struct multiboot_info* info) {
   debug_init();
 
-  DEBUG("Magic Value: %x", magic);
-  DEBUG("Bootloader name: %s", info->boot_loader_name);
+  INFO("Magic Value: %x", magic);
+  INFO("Bootloader name: %s", info->boot_loader_name);
 
   vga_init();
   vga_set_foreground(VGA_COLOR_GREY);

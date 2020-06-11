@@ -1,6 +1,10 @@
 #ifndef _DEBUG_H
 #define _DEBUG_H
 
+#include "../../_deps/printf-src/printf.h"
+
+#ifdef DEBUG
+
 #define DEBUG_BLACK "\e[0;30m"
 #define DEBUG_RED "\e[0;31m"
 #define DEBUG_GREEN "\e[0;32m"
@@ -44,29 +48,36 @@
 
 #define __FILENAME__ STRIPPATH(__FILE__)
 
-#include "../../_deps/printf-src/printf.h"
-
 #define ERROR(FORMAT, ...) \
     printf(DEBUG_YELLOW"[%15s:%-3d] "DEBUG_BLUE"%s(): "DEBUG_RED FORMAT DEBUG_RESET"\n", \
         __FILENAME__, __LINE__,\
         __func__, \
         ##__VA_ARGS__)
 
-#define DEBUG(FORMAT, ...) \
+#define INFO(FORMAT, ...) \
     printf(DEBUG_YELLOW"[%15s:%-3d] "DEBUG_BLUE"%s(): "DEBUG_WHITE FORMAT DEBUG_RESET"\n", \
         __FILENAME__, __LINE__,\
         __func__, \
         ##__VA_ARGS__)
 
-#define DEBUG_INIT_START() \
+#define INIT_START() \
     printf(DEBUG_YELLOW"[%15s:%-3d] "DEBUG_BLUE"%s(): "DEBUG_WHITE "*** INITIALIZING ***" DEBUG_RESET"\n", \
         __FILENAME__, __LINE__,\
         __func__)
 
-#define DEBUG_INIT_END() \
+#define INIT_END() \
     printf(DEBUG_YELLOW"[%15s:%-3d] "DEBUG_BLUE"%s(): "DEBUG_WHITE "*** INITIALIZED! ***" DEBUG_RESET"\n", \
         __FILENAME__, __LINE__,\
         __func__)
+
+#else
+
+#define ERROR(FORMAT, ...)
+#define INFO(FORMAT, ...)
+#define INIT_START()
+#define INIT_END()
+
+#endif
 
 void debug_init();
 

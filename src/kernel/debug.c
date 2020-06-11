@@ -6,7 +6,7 @@ void _putchar(char c) {
 }
 
 void debug_init() {
-  DEBUG_INIT_START();
+  INIT_START();
   serial_init(SERIAL_COM1);
-  DEBUG_INIT_END();
+  INIT_END();
 }

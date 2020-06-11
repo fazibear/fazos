@@ -20,6 +20,8 @@ MESSAGE (STATUS "printf source dir: ${printf_SOURCE_DIR}")
 
 # Build parts
 
+SET (CMAKE_BUILD_TYPE Debug)
+
 ADD_SUBDIRECTORY (iso)
 ADD_SUBDIRECTORY (src/kernel)
 

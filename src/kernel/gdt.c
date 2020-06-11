@@ -5,7 +5,7 @@ struct gdt_entry gdt[3];
 struct gdt_register gdt_pointer;
 
 void gdt_init() {
-  DEBUG_INIT_START();
+  INIT_START();
   gdt_pointer.limit = sizeof(gdt);
   gdt_pointer.base = (unsigned int) &gdt;
 
@@ -14,7 +14,7 @@ void gdt_init() {
   gdt_set_entry(2, 0, 0xFFFFFFFF, GDT_ACCESS_KERNEL | GDT_ACCESS_DATA, GDT_SEGMENT_PROTECTED | GDT_SEGMENT_BLOCKS_4K);
 
   load_gdt(&gdt_pointer);
-  DEBUG_INIT_END();
+  INIT_END();
 }
 
 /* Setup a descriptor in the Global Descriptor Table */
