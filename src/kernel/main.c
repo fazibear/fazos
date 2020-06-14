@@ -4,6 +4,7 @@
 #include "isr.h"
 
 #include "pmem.h"
+#include "paging.h"
 #include "timer.h"
 
 #include "multiboot.h"
@@ -20,6 +21,7 @@ void main(unsigned int magic, struct multiboot_info* info) {
   vga_set_foreground(VGA_COLOR_GREY);
 
   pmem_init(info);
+  paging_init();
 
   gdt_init();
   idt_init();
