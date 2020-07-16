@@ -12,3 +12,8 @@ _deps
 .gdb_history
 
 build/
+
+.ninja_deps
+.ninja_log
+build.ninja
+rules.ninja
